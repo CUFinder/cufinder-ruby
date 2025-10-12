@@ -1,4 +1,4 @@
-module CufinderRuby
+module Cufinder
   class Error < StandardError; end
   
   class AuthenticationError < Error; end

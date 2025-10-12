@@ -1,4 +1,4 @@
-module CufinderRuby
+module Cufinder
   # Base response structure for all CUFinder API responses
   class BaseResponse
     attr_accessor :query, :credit_count, :meta_data, :confidence_level

@@ -1,8 +1,8 @@
-require "cufinder_ruby/client"
+require "cufinder_ruby/base_api_client"
 require "cufinder_ruby/types"
 require "cufinder_ruby/errors"
 
-module CufinderRuby
+module Cufinder
   class Services
     def initialize(client)
       @client = client

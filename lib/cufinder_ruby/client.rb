@@ -1,84 +1,113 @@
-require "httparty"
-require "json"
-require "cufinder_ruby/errors"
+require "cufinder_ruby/base_api_client"
+require "cufinder_ruby/services"
 
-module CufinderRuby
+module Cufinder
+  # Main client class for interacting with the CUFinder API
+  # 
+  # This is the primary entry point for all API operations.
+  # It provides convenient methods for each service and handles
+  # authentication and HTTP communication internally.
+  #
+  # @example Basic usage
+  #   client = Cufinder::Client.new(api_key: 'your-api-key')
+  #   result = client.cuf(company_name: 'Example Corp', country_code: 'US')
+  #
   class Client
-    include HTTParty
+    attr_reader :client, :services
     
-    attr_reader :api_key, :base_url, :timeout, :max_retries
-    
-    def initialize(api_key:, base_url: "https://api.cufinder.io/v2", timeout: 30, max_retries: 3)
-      @api_key = api_key
-      @base_url = base_url
-      @timeout = timeout
-      @max_retries = max_retries
-      
-      self.class.base_uri base_url
-      self.class.headers "User-Agent" => "cufinder-ruby/#{CufinderRuby::VERSION}"
-    end
-    
-    def post(endpoint, data)
-      response = self.class.post(
-        endpoint,
-        body: form_encode(data),
-        headers: {
-          "x-api-key" => api_key,
-          "Content-Type" => "application/x-www-form-urlencoded"
-        },
-        timeout: @timeout
+    # Initialize a new CUFinder client
+    #
+    # @param api_key [String] Your CUFinder API key
+    # @param timeout [Integer] Request timeout in seconds (default: 30)
+    # @param max_retries [Integer] Maximum number of retries (default: 3)
+    def initialize(api_key:, timeout: 30, max_retries: 3)
+      @client = BaseApiClient.new(
+        api_key: api_key,
+        timeout: timeout,
+        max_retries: max_retries
       )
-      
-      handle_response(response)
+      @services = Services.new(@client)
     end
     
-    private
-    
-    def form_encode(data)
-      return "" if data.nil? || data.empty?
-      
-      data.map do |key, value|
-        next if value.nil?
-        
-        if value.is_a?(Array)
-          value.map { |v| "#{key}=#{CGI.escape(v.to_s)}" }.join("&")
-        else
-          "#{key}=#{CGI.escape(value.to_s)}"
-        end
-      end.compact.join("&")
+    # Service methods - Each method corresponds to a CUFinder API service
+    def cuf(company_name:, country_code:)
+      @services.get_domain(company_name: company_name, country_code: country_code)
     end
     
-    def handle_response(response)
-      case response.code
-      when 200..299
-        extract_data(response.parsed_response)
-      when 401
-        raise AuthenticationError, response.body
-      when 402
-        raise CreditLimitError, response.body
-      when 429
-        raise RateLimitError, response.body
-      else
-        raise ApiError.new(response.code, response.body)
-      end
-    rescue JSON::ParserError => e
-      raise HttpError, "Failed to parse response: #{e.message}"
-    rescue HTTParty::Error => e
-      raise HttpError, "HTTP request failed: #{e.message}"
+    def lcuf(company_name:)
+      @services.get_linkedin_url(company_name: company_name)
     end
     
-    def extract_data(response_data)
-      # Extract data from wrapper if present (similar to Go SDK's mapToStruct)
-      if response_data.is_a?(Hash) && response_data.key?("data")
-        data = response_data["data"]
-        # Add meta_data if it exists in the outer response
-        if response_data.key?("meta_data")
-          data["meta_data"] = response_data["meta_data"]
-        end
-        data
-      else
-        response_data
-      end
+    def dtc(company_website:)
+      @services.get_company_name(company_website: company_website)
+    end
+    
+    def dte(company_website:)
+      @services.get_emails(company_website: company_website)
+    end
+    
+    def ntp(company_name:)
+      @services.get_phones(company_name: company_name)
+    end
+    
+    def rel(email:)
+      @services.get_person_by_email(email: email)
+    end
+    
+    def fcl(query:)
+      @services.find_company_lookalikes(query: query)
+    end
+    
+    def elf(query:)
+      @services.enrich_linkedin_fundraising(query: query)
+    end
+    
+    def car(query:)
+      @services.get_annual_revenue(query: query)
+    end
+    
+    def fcc(query:)
+      @services.find_company_children(query: query)
+    end
+    
+    def fts(query:)
+      @services.find_tech_stack(query: query)
+    end
+    
+    def epp(linkedin_url:)
+      @services.enrich_person_profile(linkedin_url: linkedin_url)
+    end
+    
+    def fwe(linkedin_url:)
+      @services.find_work_email(linkedin_url: linkedin_url)
+    end
+    
+    def tep(full_name:, company:)
+      @services.get_title_email_phone(full_name: full_name, company: company)
+    end
+    
+    def enc(query:)
+      @services.enrich_company(query: query)
+    end
+    
+    def cec(query:)
+      @services.get_company_employee_count(query: query)
+    end
+    
+    def clo(query:)
+      @services.get_company_locations(query: query)
+    end
+    
+    def cse(**params)
+      @services.search_companies(params)
+    end
+    
+    def pse(**params)
+      @services.search_people(params)
+    end
+    
+    def lbs(**params)
+      @services.search_local_businesses(params)
     end
   end
 end
