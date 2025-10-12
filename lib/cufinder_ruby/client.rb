@@ -15,7 +15,6 @@ module CufinderRuby
       @max_retries = max_retries
       
       self.class.base_uri base_url
-      self.class.timeout timeout
       self.class.headers "User-Agent" => "cufinder-ruby/#{CufinderRuby::VERSION}"
     end
     
@@ -26,7 +25,8 @@ module CufinderRuby
         headers: {
           "x-api-key" => api_key,
           "Content-Type" => "application/x-www-form-urlencoded"
-        }
+        },
+        timeout: @timeout
       )
       
       handle_response(response)
