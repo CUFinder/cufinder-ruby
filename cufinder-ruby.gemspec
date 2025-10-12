@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = "cufinder-ruby"
-  spec.version       = "0.0.1"
+  spec.version       = "1.0.0"
   spec.authors       = ["CUFinder Team"]
   spec.email         = ["support@cufinder.io"]
 

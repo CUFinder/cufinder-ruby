@@ -1,3 +1,3 @@
-module CufinderRuby
-  VERSION = "0.0.1"
+module Cufinder
+  VERSION = "1.0.0"
 end
