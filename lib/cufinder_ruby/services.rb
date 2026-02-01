@@ -212,6 +212,14 @@ module Cufinder
       response = @client.post("/csn", params)
       CsnResponse.new(response)
     end
+
+    # Nao Service - Phone Number Normalizer
+    def normalize_phone(params)
+      validate_required(params, [:phone])
+      
+      response = @client.post("/nao", params)
+      NaoResponse.new(response)
+    end
     
     private
     

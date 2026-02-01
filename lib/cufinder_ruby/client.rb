@@ -133,5 +133,9 @@ module Cufinder
     def csn(url:)
       @services.get_company_snapshot(url: url)
     end
+
+    def nao(phone:)
+      @services.normalize_phone(phone: phone)
+    end
   end
 end

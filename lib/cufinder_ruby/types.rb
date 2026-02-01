@@ -583,4 +583,13 @@ module Cufinder
       @company_snapshot = data["company_snapshot"] ? CsnSnapshotInfo.new(data["company_snapshot"]) : nil
     end
   end
+
+  class NaoResponse < BaseResponse
+    attr_accessor :phone
+    
+    def initialize(data = {})
+      super(data)
+      @phone = data["phone"]
+    end
+  end
 end
