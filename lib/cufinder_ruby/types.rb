@@ -592,4 +592,13 @@ module Cufinder
       @phone = data["phone"]
     end
   end
+
+  class NaaResponse < BaseResponse
+    attr_accessor :address
+    
+    def initialize(data = {})
+      super(data)
+      @address = data["address"]
+    end
+  end
 end

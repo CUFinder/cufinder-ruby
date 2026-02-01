@@ -220,6 +220,14 @@ module Cufinder
       response = @client.post("/nao", params)
       NaoResponse.new(response)
     end
+
+    # Naa Service - Address Normalizer
+    def normalize_address(params)
+      validate_required(params, [:address])
+      
+      response = @client.post("/naa", params)
+      NaaResponse.new(response)
+    end
     
     private
     

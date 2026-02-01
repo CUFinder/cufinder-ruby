@@ -137,5 +137,9 @@ module Cufinder
     def nao(phone:)
       @services.normalize_phone(phone: phone)
     end
+
+    def naa(address:)
+      @services.normalize_address(address: address)
+    end
   end
 end
