@@ -172,6 +172,14 @@ module Cufinder
       response = @client.post("/bcd", params)
       BcdResponse.new(response)
     end
+
+    # CCP Service - Company Career Page Finder
+    def find_company_careers_page(params)
+      validate_required(params, [:url])
+      
+      response = @client.post("/ccp", params)
+      CcpResponse.new(response)
+    end
     
     private
     

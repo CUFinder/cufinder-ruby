@@ -113,5 +113,9 @@ module Cufinder
     def bcd(url:)
       @services.extract_b2b_customers(url: url)
     end
+
+    def ccp(url:)
+      @services.find_company_careers_page(url: url)
+    end
   end
 end

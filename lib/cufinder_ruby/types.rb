@@ -527,4 +527,13 @@ module Cufinder
       @customers = data["customers"] || []
     end
   end
+  
+  class CcpResponse < BaseResponse
+    attr_accessor :customers
+    
+    def initialize(data = {})
+      super(data)
+      @careers_page_url = data["careers_page_url"]
+    end
+  end
 end
