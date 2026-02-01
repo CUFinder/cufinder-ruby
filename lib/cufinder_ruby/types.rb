@@ -518,4 +518,13 @@ module Cufinder
       @companies = (data["companies"] || []).map { |c| Company.new(c) }
     end
   end
+  
+  class BcdResponse < BaseResponse
+    attr_accessor :customers
+    
+    def initialize(data = {})
+      super(data)
+      @customers = data["customers"] || []
+    end
+  end
 end

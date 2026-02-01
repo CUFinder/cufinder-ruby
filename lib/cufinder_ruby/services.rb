@@ -164,6 +164,14 @@ module Cufinder
       response = @client.post("/lbs", params)
       LbsResponse.new(response)
     end
+
+    # BCD Service - B2B Customers Finder
+    def extract_b2b_customers(params)
+      validate_required(params, [:url])
+      
+      response = @client.post("/bcd", params)
+      BcdResponse.new(response)
+    end
     
     private
     

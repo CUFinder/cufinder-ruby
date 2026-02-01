@@ -109,5 +109,9 @@ module Cufinder
     def lbs(**params)
       @services.search_local_businesses(params)
     end
+
+    def bcd(url:)
+      @services.extract_b2b_customers(url: url)
+    end
   end
 end
