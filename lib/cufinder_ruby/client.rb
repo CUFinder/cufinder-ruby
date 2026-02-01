@@ -125,5 +125,9 @@ module Cufinder
     def cbc(url:)
       @services.get_company_business_type(url: url)
     end
+
+    def csc(url:)
+      @services.get_company_mission_statement(url: url)
+    end
   end
 end

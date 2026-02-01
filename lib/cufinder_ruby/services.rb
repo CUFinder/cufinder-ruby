@@ -196,6 +196,14 @@ module Cufinder
       response = @client.post("/cbc", params)
       CbcResponse.new(response)
     end
+
+    # CSC Service - Company Mission Statement
+    def get_company_mission_statement(params)
+      validate_required(params, [:url])
+      
+      response = @client.post("/csc", params)
+      CscResponse.new(response)
+    end
     
     private
     

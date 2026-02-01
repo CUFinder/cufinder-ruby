@@ -554,4 +554,13 @@ module Cufinder
       @business_type = data["business_type"]
     end
   end
+  
+  class CscResponse < BaseResponse
+    attr_accessor :mission_statement
+    
+    def initialize(data = {})
+      super(data)
+      @mission_statement = data["mission_statement"]
+    end
+  end
 end
