@@ -204,6 +204,14 @@ module Cufinder
       response = @client.post("/csc", params)
       CscResponse.new(response)
     end
+
+    # CSN Service - Company Snapshot
+    def get_company_snapshot(params)
+      validate_required(params, [:url])
+      
+      response = @client.post("/csn", params)
+      CsnResponse.new(response)
+    end
     
     private
     

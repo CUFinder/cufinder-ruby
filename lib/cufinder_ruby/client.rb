@@ -129,5 +129,9 @@ module Cufinder
     def csc(url:)
       @services.get_company_mission_statement(url: url)
     end
+
+    def csn(url:)
+      @services.get_company_snapshot(url: url)
+    end
   end
 end

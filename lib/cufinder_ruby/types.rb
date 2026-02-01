@@ -563,4 +563,24 @@ module Cufinder
       @mission_statement = data["mission_statement"]
     end
   end
+
+  class CsnSnapshotInfo
+    attr_accessor :icp, :target_industries, :target_personas, :value_proposition
+    
+    def initialize(data = {})
+      @icp = data["icp"]
+      @target_industries = data["target_industries"] || []
+      @target_personas = data["target_personas"]
+      @value_proposition = data["value_proposition"]
+    end
+  end
+
+  class CsnResponse < BaseResponse
+    attr_accessor :company_snapshot
+    
+    def initialize(data = {})
+      super(data)
+      @company_snapshot = data["company_snapshot"] ? CsnSnapshotInfo.new(data["company_snapshot"]) : nil
+    end
+  end
 end
