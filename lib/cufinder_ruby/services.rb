@@ -188,6 +188,14 @@ module Cufinder
       response = @client.post("/isc", params)
       IscResponse.new(response)
     end
+
+    # CBC Service - Company B2B or B2C Checker
+    def get_company_business_type(params)
+      validate_required(params, [:url])
+      
+      response = @client.post("/cbc", params)
+      CbcResponse.new(response)
+    end
     
     private
     

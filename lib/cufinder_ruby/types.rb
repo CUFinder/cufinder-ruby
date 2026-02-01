@@ -538,11 +538,20 @@ module Cufinder
   end
   
   class IscResponse < BaseResponse
-    attr_accessor :customers
+    attr_accessor :is_saas
     
     def initialize(data = {})
       super(data)
       @is_saas = data["is_saas"]
+    end
+  end
+  
+  class CbcResponse < BaseResponse
+    attr_accessor :business_type
+    
+    def initialize(data = {})
+      super(data)
+      @business_type = data["business_type"]
     end
   end
 end

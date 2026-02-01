@@ -121,5 +121,9 @@ module Cufinder
     def isc(url:)
       @services.is_saas(url: url)
     end
+
+    def cbc(url:)
+      @services.get_company_business_type(url: url)
+    end
   end
 end
