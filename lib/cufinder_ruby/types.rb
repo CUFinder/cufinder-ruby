@@ -518,4 +518,87 @@ module Cufinder
       @companies = (data["companies"] || []).map { |c| Company.new(c) }
     end
   end
+  
+  class BcdResponse < BaseResponse
+    attr_accessor :customers
+    
+    def initialize(data = {})
+      super(data)
+      @customers = data["customers"] || []
+    end
+  end
+  
+  class CcpResponse < BaseResponse
+    attr_accessor :customers
+    
+    def initialize(data = {})
+      super(data)
+      @careers_page_url = data["careers_page_url"]
+    end
+  end
+  
+  class IscResponse < BaseResponse
+    attr_accessor :is_saas
+    
+    def initialize(data = {})
+      super(data)
+      @is_saas = data["is_saas"]
+    end
+  end
+  
+  class CbcResponse < BaseResponse
+    attr_accessor :business_type
+    
+    def initialize(data = {})
+      super(data)
+      @business_type = data["business_type"]
+    end
+  end
+  
+  class CscResponse < BaseResponse
+    attr_accessor :mission_statement
+    
+    def initialize(data = {})
+      super(data)
+      @mission_statement = data["mission_statement"]
+    end
+  end
+
+  class CsnSnapshotInfo
+    attr_accessor :icp, :target_industries, :target_personas, :value_proposition
+    
+    def initialize(data = {})
+      @icp = data["icp"]
+      @target_industries = data["target_industries"] || []
+      @target_personas = data["target_personas"]
+      @value_proposition = data["value_proposition"]
+    end
+  end
+
+  class CsnResponse < BaseResponse
+    attr_accessor :company_snapshot
+    
+    def initialize(data = {})
+      super(data)
+      @company_snapshot = data["company_snapshot"] ? CsnSnapshotInfo.new(data["company_snapshot"]) : nil
+    end
+  end
+
+  class NaoResponse < BaseResponse
+    attr_accessor :phone
+    
+    def initialize(data = {})
+      super(data)
+      @phone = data["phone"]
+    end
+  end
+
+  class NaaResponse < BaseResponse
+    attr_accessor :address
+    
+    def initialize(data = {})
+      super(data)
+      @address = data["address"]
+    end
+  end
 end

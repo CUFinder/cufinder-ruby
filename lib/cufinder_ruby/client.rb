@@ -109,5 +109,37 @@ module Cufinder
     def lbs(**params)
       @services.search_local_businesses(params)
     end
+
+    def bcd(url:)
+      @services.extract_b2b_customers(url: url)
+    end
+
+    def ccp(url:)
+      @services.find_company_careers_page(url: url)
+    end
+
+    def isc(url:)
+      @services.is_saas(url: url)
+    end
+
+    def cbc(url:)
+      @services.get_company_business_type(url: url)
+    end
+
+    def csc(url:)
+      @services.get_company_mission_statement(url: url)
+    end
+
+    def csn(url:)
+      @services.get_company_snapshot(url: url)
+    end
+
+    def nao(phone:)
+      @services.normalize_phone(phone: phone)
+    end
+
+    def naa(address:)
+      @services.normalize_address(address: address)
+    end
   end
 end

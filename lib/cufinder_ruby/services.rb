@@ -164,6 +164,70 @@ module Cufinder
       response = @client.post("/lbs", params)
       LbsResponse.new(response)
     end
+
+    # BCD Service - B2B Customers Finder
+    def extract_b2b_customers(params)
+      validate_required(params, [:url])
+      
+      response = @client.post("/bcd", params)
+      BcdResponse.new(response)
+    end
+
+    # CCP Service - Company Career Page Finder
+    def find_company_careers_page(params)
+      validate_required(params, [:url])
+      
+      response = @client.post("/ccp", params)
+      CcpResponse.new(response)
+    end
+
+    # ISC Service - Company Saas Checker
+    def is_saas(params)
+      validate_required(params, [:url])
+      
+      response = @client.post("/isc", params)
+      IscResponse.new(response)
+    end
+
+    # CBC Service - Company B2B or B2C Checker
+    def get_company_business_type(params)
+      validate_required(params, [:url])
+      
+      response = @client.post("/cbc", params)
+      CbcResponse.new(response)
+    end
+
+    # CSC Service - Company Mission Statement
+    def get_company_mission_statement(params)
+      validate_required(params, [:url])
+      
+      response = @client.post("/csc", params)
+      CscResponse.new(response)
+    end
+
+    # CSN Service - Company Snapshot
+    def get_company_snapshot(params)
+      validate_required(params, [:url])
+      
+      response = @client.post("/csn", params)
+      CsnResponse.new(response)
+    end
+
+    # Nao Service - Phone Number Normalizer
+    def normalize_phone(params)
+      validate_required(params, [:phone])
+      
+      response = @client.post("/nao", params)
+      NaoResponse.new(response)
+    end
+
+    # Naa Service - Address Normalizer
+    def normalize_address(params)
+      validate_required(params, [:address])
+      
+      response = @client.post("/naa", params)
+      NaaResponse.new(response)
+    end
     
     private
     
