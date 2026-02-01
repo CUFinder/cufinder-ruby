@@ -536,4 +536,13 @@ module Cufinder
       @careers_page_url = data["careers_page_url"]
     end
   end
+  
+  class IscResponse < BaseResponse
+    attr_accessor :customers
+    
+    def initialize(data = {})
+      super(data)
+      @is_saas = data["is_saas"]
+    end
+  end
 end

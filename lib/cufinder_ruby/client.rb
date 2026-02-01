@@ -117,5 +117,9 @@ module Cufinder
     def ccp(url:)
       @services.find_company_careers_page(url: url)
     end
+
+    def isc(url:)
+      @services.is_saas(url: url)
+    end
   end
 end

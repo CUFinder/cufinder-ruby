@@ -180,6 +180,14 @@ module Cufinder
       response = @client.post("/ccp", params)
       CcpResponse.new(response)
     end
+
+    # ISC Service - Company Saas Checker
+    def is_saas(params)
+      validate_required(params, [:url])
+      
+      response = @client.post("/isc", params)
+      IscResponse.new(response)
+    end
     
     private
     
