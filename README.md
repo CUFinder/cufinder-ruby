@@ -53,7 +53,7 @@ client = Cufinder::Client.new(
 
 ## API Reference
 
-This SDK covers all 28 Cufinder API (v2) endpoints:
+This SDK covers all 32 Cufinder API (v2) endpoints:
 
 - **CUF** - [Company Name to Domain](https://apidoc.cufinder.io/apis/company-name-to-domain)
 - **LCUF** - [LinkedIn Company URL Finder](https://apidoc.cufinder.io/apis/company-linkedin-url-finder)
@@ -83,6 +83,10 @@ This SDK covers all 28 Cufinder API (v2) endpoints:
 - **CSN** - [Company Snapshot](https://apidoc.cufinder.io/apis/company-snapshot)
 - **NAO** - [Phone Number Normalizer](https://apidoc.cufinder.io/apis/phone-number-normalizer)
 - **NAA** - [Address Normalizer](https://apidoc.cufinder.io/apis/address-normalizer)
+- **CEF** - [Company Employees Finder](https://apidoc.cufinder.io/apis/company-employees-finder)
+- **NAC** - [Company Name Normalizer](https://apidoc.cufinder.io/apis/company-name-normalizer)
+- **CAA** - [Company Activities API](https://apidoc.cufinder.io/apis/company-activities-api)
+- **CJA** - [Company Jobs API](https://apidoc.cufinder.io/apis/company-jobs-api)
 
 
 **CUF - Company Name to Domain**
@@ -279,7 +283,7 @@ puts result
 
 **BCD - B2B Customers Finder**
 
-Returns company's careers page
+Returns B2B customers for a company
 
 ```ruby
 result = client.bcd(url: "stripe.com")
@@ -288,7 +292,7 @@ puts result
 
 **CCP - Company Career Page Finder**
 
-Returns is company SaaS or not
+Returns company's careers page URL
 
 ```ruby
 result = client.ccp(url: "stripe.com")
@@ -346,6 +350,42 @@ Returns normalized address
 
 ```ruby
 result = client.naa(address: "1095 avenue of the Americas, 6th Avenue ny 10036")
+puts result
+```
+
+**CEF - Company Employees Finder**
+
+Returns company's employees
+
+```ruby
+result = client.cef(query: "cufinder", page: 1)
+puts result
+```
+
+**NAC - Company Name Normalizer**
+
+Returns normalized company name
+
+```ruby
+result = client.nac(company: "cufinder inc.")
+puts result
+```
+
+**CAA - Company Activities API**
+
+Returns company's LinkedIn activities
+
+```ruby
+result = client.caa(query: "cufinder", page: 1)
+puts result
+```
+
+**CJA - Company Jobs API**
+
+Returns company's job listings
+
+```ruby
+result = client.cja(name: "google", country: "united states", page: 1)
 puts result
 ```
 
