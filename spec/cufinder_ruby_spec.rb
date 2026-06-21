@@ -334,6 +334,17 @@ RSpec.describe Cufinder do
           credit_count: 80
         }
       }.to_json)
+    
+    stub_request(:post, "https://api.cufinder.io/v2/nac")
+      .with(headers: { "x-api-key" => api_key })
+      .to_return(status: 200, body: {
+        status: 1,
+        data: {
+          company: "Cufinder Inc.",
+          confidence_level: 95,
+          credit_count: 1
+        }
+      }.to_json)
   end
   
   describe "CUF Service" do
@@ -576,6 +587,17 @@ RSpec.describe Cufinder do
       expect(result.employees.first.company_name).to eq("Example Corp")
       expect(result.employees.first.country).to eq("US")
       expect(result.confidence_level).to eq(90)
+    end
+  end
+  
+  describe "NAC Service" do
+    it "normalizes company name" do
+      result = client.nac(company: "cufinder inc.")
+      
+      expect(result).to be_a(Cufinder::NacResponse)
+      expect(result.company).to eq("Cufinder Inc.")
+      expect(result.confidence_level).to eq(95)
+      expect(result.credit_count).to eq(1)
     end
   end
   

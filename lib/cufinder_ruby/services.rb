@@ -236,6 +236,14 @@ module Cufinder
       response = @client.post("/cef", params)
       CefResponse.new(response)
     end
+
+    # NAC Service - Company Name Normalizer
+    def normalize_company_name(params)
+      validate_required(params, [:company])
+      
+      response = @client.post("/nac", params)
+      NacResponse.new(response)
+    end
     
     private
     

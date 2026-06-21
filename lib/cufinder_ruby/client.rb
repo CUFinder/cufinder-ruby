@@ -145,5 +145,9 @@ module Cufinder
     def cef(query:, page:)
       @services.find_company_employees(query: query, page: page)
     end
+
+    def nac(company:)
+      @services.normalize_company_name(company: company)
+    end
   end
 end

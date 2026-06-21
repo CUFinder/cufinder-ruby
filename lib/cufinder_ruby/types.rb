@@ -644,4 +644,13 @@ module Cufinder
       @employees = (data["employees"] || []).map { |e| CefEmployee.new(e) }
     end
   end
+
+  class NacResponse < BaseResponse
+    attr_accessor :company
+    
+    def initialize(data = {})
+      super(data)
+      @company = data["company"]
+    end
+  end
 end
