@@ -252,6 +252,12 @@ module Cufinder
       response = @client.post("/caa", params)
       CaaResponse.new(response)
     end
+
+    # CJA Service - Company Jobs API
+    def search_company_jobs(params)
+      response = @client.post("/cja", params)
+      CjaResponse.new(response)
+    end
     
     private
     

@@ -375,6 +375,44 @@ RSpec.describe Cufinder do
           credit_count: 1
         }
       }.to_json)
+
+    stub_request(:post, "https://api.cufinder.io/v2/cja")
+      .with(headers: { "x-api-key" => api_key })
+      .to_return(status: 200, body: {
+        status: 1,
+        data: {
+          jobs: [
+            {
+              company: {
+                name: "Example Corp",
+                industry: "Technology",
+                website: "example.com",
+                linkedin: "linkedin.com/company/example",
+                followers_count: 5000,
+                employees: { range: "51-200" },
+                founded_date: "2015",
+                annual_revenue: "$10M",
+                funding_amount: 5000000,
+                main_location: {
+                  country: "US",
+                  state: "CA",
+                  city: "San Francisco"
+                }
+              },
+              job: {
+                job_id: "job-123",
+                title: "Software Engineer",
+                url: "https://example.com/jobs/123",
+                location: "San Francisco, CA",
+                posted_at: "2026-06-01T00:00:00.000Z",
+                posted_at_text: "20 days ago"
+              }
+            }
+          ],
+          confidence_level: 85,
+          credit_count: 98
+        }
+      }.to_json)
   end
   
   describe "CUF Service" do
@@ -646,6 +684,30 @@ RSpec.describe Cufinder do
       expect(result.activities.first.activity_is_video).to eq(true)
       expect(result.activities.first.activity_reactions_count).to eq(3)
       expect(result.confidence_level).to eq(90)
+    end
+  end
+
+  describe "CJA Service" do
+    it "searches company jobs" do
+      result = client.cja(name: "Example Corp", country: "US")
+      
+      expect(result).to be_a(Cufinder::CjaResponse)
+      expect(result.jobs).to be_an(Array)
+      expect(result.jobs.length).to eq(1)
+      expect(result.jobs.first).to be_a(Cufinder::CompanyJob)
+      expect(result.jobs.first.company).to be_a(Cufinder::CjaCompany)
+      expect(result.jobs.first.company.name).to eq("Example Corp")
+      expect(result.jobs.first.company.industry).to eq("Technology")
+      expect(result.jobs.first.company.followers_count).to eq(5000)
+      expect(result.jobs.first.company.funding_amount).to eq(5000000)
+      expect(result.jobs.first.company.main_location).to be_a(Cufinder::MainLocation)
+      expect(result.jobs.first.company.main_location.city).to eq("San Francisco")
+      expect(result.jobs.first.job).to be_a(Cufinder::CjaJob)
+      expect(result.jobs.first.job.title).to eq("Software Engineer")
+      expect(result.jobs.first.job.url).to eq("https://example.com/jobs/123")
+      expect(result.jobs.first.job.posted_at_text).to eq("20 days ago")
+      expect(result.confidence_level).to eq(85)
+      expect(result.credit_count).to eq(98)
     end
   end
   

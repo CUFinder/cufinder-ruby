@@ -690,4 +690,57 @@ module Cufinder
       @activities = (data["activities"] || []).map { |a| CaaActivity.new(a) }
     end
   end
+
+  # CJA Company (within job listing)
+  class CjaCompany
+    attr_accessor :name, :industry, :website, :linkedin, :followers_count,
+                  :employees, :founded_date, :annual_revenue, :funding_amount,
+                  :main_location
+    
+    def initialize(data = {})
+      @name = data["name"]
+      @industry = data["industry"]
+      @website = data["website"]
+      @linkedin = data["linkedin"]
+      @followers_count = data["followers_count"]
+      @employees = data["employees"]
+      @founded_date = data["founded_date"]
+      @annual_revenue = data["annual_revenue"]
+      @funding_amount = data["funding_amount"]
+      @main_location = data["main_location"] ? MainLocation.new(data["main_location"]) : nil
+    end
+  end
+
+  # CJA Job listing
+  class CjaJob
+    attr_accessor :job_id, :title, :url, :location, :posted_at, :posted_at_text
+    
+    def initialize(data = {})
+      @job_id = data["job_id"]
+      @title = data["title"]
+      @url = data["url"]
+      @location = data["location"]
+      @posted_at = data["posted_at"]
+      @posted_at_text = data["posted_at_text"]
+    end
+  end
+
+  # CJA Company Job (combined company + job)
+  class CompanyJob
+    attr_accessor :company, :job
+    
+    def initialize(data = {})
+      @company = data["company"] ? CjaCompany.new(data["company"]) : nil
+      @job = data["job"] ? CjaJob.new(data["job"]) : nil
+    end
+  end
+
+  class CjaResponse < BaseResponse
+    attr_accessor :jobs
+    
+    def initialize(data = {})
+      super(data)
+      @jobs = (data["jobs"] || []).map { |j| CompanyJob.new(j) }
+    end
+  end
 end

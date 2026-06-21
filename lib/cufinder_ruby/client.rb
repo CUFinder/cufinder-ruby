@@ -153,5 +153,9 @@ module Cufinder
     def caa(query:, page:)
       @services.get_company_activities(query: query, page: page)
     end
+
+    def cja(**params)
+      @services.search_company_jobs(params)
+    end
   end
 end
