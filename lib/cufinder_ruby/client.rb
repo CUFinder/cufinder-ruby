@@ -149,5 +149,9 @@ module Cufinder
     def nac(company:)
       @services.normalize_company_name(company: company)
     end
+
+    def caa(query:, page:)
+      @services.get_company_activities(query: query, page: page)
+    end
   end
 end

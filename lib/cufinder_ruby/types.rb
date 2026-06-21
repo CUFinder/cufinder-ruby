@@ -653,4 +653,41 @@ module Cufinder
       @company = data["company"]
     end
   end
+
+  # CAA Activity
+  class CaaActivity
+    attr_accessor :activity_url, :activity_id, :author_name, :author_type, :author_url,
+                  :activity_comments_count, :activity_hashtags, :activity_headline,
+                  :activity_images, :activity_is_video, :activity_posted_at,
+                  :activity_reactions_count, :activity_reposts_count, :activity_text,
+                  :activity_top_comments, :activity_videos
+    
+    def initialize(data = {})
+      @activity_url = data["activity_url"]
+      @activity_id = data["activity_id"]
+      @author_name = data["author_name"]
+      @author_type = data["author_type"]
+      @author_url = data["author_url"]
+      @activity_comments_count = data["activity_comments_count"]
+      @activity_hashtags = data["activity_hashtags"] || []
+      @activity_headline = data["activity_headline"]
+      @activity_images = data["activity_images"] || []
+      @activity_is_video = data["activity_is_video"]
+      @activity_posted_at = data["activity_posted_at"]
+      @activity_reactions_count = data["activity_reactions_count"]
+      @activity_reposts_count = data["activity_reposts_count"]
+      @activity_text = data["activity_text"]
+      @activity_top_comments = data["activity_top_comments"] || []
+      @activity_videos = data["activity_videos"] || []
+    end
+  end
+
+  class CaaResponse < BaseResponse
+    attr_accessor :activities
+    
+    def initialize(data = {})
+      super(data)
+      @activities = (data["activities"] || []).map { |a| CaaActivity.new(a) }
+    end
+  end
 end

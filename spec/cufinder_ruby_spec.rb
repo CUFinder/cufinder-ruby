@@ -345,6 +345,36 @@ RSpec.describe Cufinder do
           credit_count: 1
         }
       }.to_json)
+    
+    stub_request(:post, "https://api.cufinder.io/v2/caa")
+      .with(headers: { "x-api-key" => api_key })
+      .to_return(status: 200, body: {
+        status: 1,
+        data: {
+          activities: [
+            {
+              activity_url: "https://www.linkedin.com/posts/example-activity-123",
+              activity_id: "7462132400869888002",
+              author_name: "TechCorp",
+              author_type: "Organization",
+              author_url: "linkedin.com/company/techcorp",
+              activity_comments_count: 59,
+              activity_hashtags: ["#AI", "#Anthropic", "#CUFinder"],
+              activity_headline: "AI Growth Update",
+              activity_images: ["https://media.licdn.com/image.jpg"],
+              activity_is_video: true,
+              activity_posted_at: "2026-05-18T13:30:04.063Z",
+              activity_reactions_count: 3,
+              activity_reposts_count: 0,
+              activity_text: "Anthropic is projected to grow 222x by 2030",
+              activity_top_comments: [],
+              activity_videos: ["https://dms.licdn.com/video.mp4"]
+            }
+          ],
+          confidence_level: 90,
+          credit_count: 1
+        }
+      }.to_json)
   end
   
   describe "CUF Service" do
@@ -598,6 +628,24 @@ RSpec.describe Cufinder do
       expect(result.company).to eq("Cufinder Inc.")
       expect(result.confidence_level).to eq(95)
       expect(result.credit_count).to eq(1)
+    end
+  end
+  
+  describe "CAA Service" do
+    it "gets company activities" do
+      result = client.caa(query: "TechCorp", page: 1)
+      
+      expect(result).to be_a(Cufinder::CaaResponse)
+      expect(result.activities).to be_an(Array)
+      expect(result.activities.length).to eq(1)
+      expect(result.activities.first).to be_a(Cufinder::CaaActivity)
+      expect(result.activities.first.activity_id).to eq("7462132400869888002")
+      expect(result.activities.first.author_name).to eq("TechCorp")
+      expect(result.activities.first.activity_comments_count).to eq(59)
+      expect(result.activities.first.activity_hashtags).to eq(["#AI", "#Anthropic", "#CUFinder"])
+      expect(result.activities.first.activity_is_video).to eq(true)
+      expect(result.activities.first.activity_reactions_count).to eq(3)
+      expect(result.confidence_level).to eq(90)
     end
   end
   

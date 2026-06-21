@@ -244,6 +244,14 @@ module Cufinder
       response = @client.post("/nac", params)
       NacResponse.new(response)
     end
+
+    # CAA Service - Company Activities API
+    def get_company_activities(params)
+      validate_required(params, [:query, :page])
+      
+      response = @client.post("/caa", params)
+      CaaResponse.new(response)
+    end
     
     private
     
