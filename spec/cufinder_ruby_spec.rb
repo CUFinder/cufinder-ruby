@@ -298,6 +298,42 @@ RSpec.describe Cufinder do
           credit_count: 5
         }
       }.to_json)
+    
+    stub_request(:post, "https://api.cufinder.io/v2/cef")
+      .with(headers: { "x-api-key" => api_key })
+      .to_return(status: 200, body: {
+        status: 1,
+        data: {
+          employees: [
+            {
+              full_name: "John Doe",
+              first_name: "John",
+              last_name: "Doe",
+              linkedin_url: "linkedin.com/in/johndoe",
+              job_title: "Software Engineer",
+              company_name: "Example Corp",
+              company_industry: "Technology",
+              country: "US",
+              state: "CA",
+              city: "San Francisco"
+            },
+            {
+              full_name: "Jane Smith",
+              first_name: "Jane",
+              last_name: "Smith",
+              linkedin_url: "linkedin.com/in/janesmith",
+              job_title: "Product Manager",
+              company_name: "Example Corp",
+              company_industry: "Technology",
+              country: "US",
+              state: "NY",
+              city: "New York"
+            }
+          ],
+          confidence_level: 90,
+          credit_count: 80
+        }
+      }.to_json)
   end
   
   describe "CUF Service" do
@@ -524,6 +560,22 @@ RSpec.describe Cufinder do
       expect(result.companies.first).to be_a(Cufinder::Company)
       expect(result.companies.first.name).to eq("Local Business 1")
       expect(result.confidence_level).to eq(75)
+    end
+  end
+  
+  describe "CEF Service" do
+    it "finds company employees" do
+      result = client.cef(query: "Example Corp", page: 1)
+      
+      expect(result).to be_a(Cufinder::CefResponse)
+      expect(result.employees).to be_an(Array)
+      expect(result.employees.length).to eq(2)
+      expect(result.employees.first).to be_a(Cufinder::CefEmployee)
+      expect(result.employees.first.full_name).to eq("John Doe")
+      expect(result.employees.first.job_title).to eq("Software Engineer")
+      expect(result.employees.first.company_name).to eq("Example Corp")
+      expect(result.employees.first.country).to eq("US")
+      expect(result.confidence_level).to eq(90)
     end
   end
   

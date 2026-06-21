@@ -141,5 +141,9 @@ module Cufinder
     def naa(address:)
       @services.normalize_address(address: address)
     end
+
+    def cef(query:, page:)
+      @services.find_company_employees(query: query, page: page)
+    end
   end
 end

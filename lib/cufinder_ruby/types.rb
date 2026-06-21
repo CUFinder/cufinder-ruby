@@ -601,4 +601,47 @@ module Cufinder
       @address = data["address"]
     end
   end
+
+  # CEF Employee
+  class CefEmployee
+    attr_accessor :full_name, :first_name, :last_name, :linkedin_url, :summary,
+                  :avatar, :country, :state, :city, :job_title,
+                  :job_title_categories, :company_name, :company_linkedin,
+                  :company_website, :company_size, :company_industry,
+                  :company_facebook, :company_twitter, :company_country,
+                  :company_state, :company_city
+    
+    def initialize(data = {})
+      @full_name = data["full_name"]
+      @first_name = data["first_name"]
+      @last_name = data["last_name"]
+      @linkedin_url = data["linkedin_url"]
+      @summary = data["summary"]
+      @avatar = data["avatar"]
+      @country = data["country"]
+      @state = data["state"]
+      @city = data["city"]
+      @job_title = data["job_title"]
+      @job_title_categories = data["job_title_categories"]
+      @company_name = data["company_name"]
+      @company_linkedin = data["company_linkedin"]
+      @company_website = data["company_website"]
+      @company_size = data["company_size"]
+      @company_industry = data["company_industry"]
+      @company_facebook = data["company_facebook"]
+      @company_twitter = data["company_twitter"]
+      @company_country = data["company_country"]
+      @company_state = data["company_state"]
+      @company_city = data["company_city"]
+    end
+  end
+
+  class CefResponse < BaseResponse
+    attr_accessor :employees
+    
+    def initialize(data = {})
+      super(data)
+      @employees = (data["employees"] || []).map { |e| CefEmployee.new(e) }
+    end
+  end
 end

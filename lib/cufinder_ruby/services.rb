@@ -228,6 +228,14 @@ module Cufinder
       response = @client.post("/naa", params)
       NaaResponse.new(response)
     end
+
+    # CEF Service - Company Employees Finder
+    def find_company_employees(params)
+      validate_required(params, [:query, :page])
+      
+      response = @client.post("/cef", params)
+      CefResponse.new(response)
+    end
     
     private
     
