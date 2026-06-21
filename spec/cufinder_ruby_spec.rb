@@ -9,7 +9,7 @@ RSpec.describe Cufinder do
     # Mock successful responses for all services
     stub_request(:post, "https://api.cufinder.io/v2/cuf")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           domain: "example.com",
@@ -20,7 +20,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/lcuf")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           linkedin_url: "linkedin.com/company/example",
@@ -31,7 +31,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/dtc")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           company_name: "Example Corp",
@@ -42,7 +42,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/dte")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           emails: ["contact@example.com", "info@example.com"],
@@ -53,7 +53,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/ntp")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           phones: ["+1-555-123-4567", "+1-555-987-6543"],
@@ -64,7 +64,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/rel")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           person: {
@@ -82,7 +82,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/fcl")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           companies: [
@@ -104,7 +104,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/elf")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           fundraising_info: {
@@ -119,7 +119,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/car")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           annual_revenue: "$10M",
@@ -130,7 +130,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/fcc")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           subsidiaries: ["Subsidiary 1", "Subsidiary 2"],
@@ -141,7 +141,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/fts")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           technologies: ["React", "Node.js", "Python"],
@@ -152,7 +152,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/epp")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           person: {
@@ -170,7 +170,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/fwe")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           work_email: "jane.smith@techcorp.com",
@@ -181,7 +181,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/tep")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           person: {
@@ -199,7 +199,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/enc")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           company: {
@@ -216,7 +216,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/cec")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           countries: { "US" => 100, "CA" => 50 },
@@ -227,7 +227,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/clo")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           locations: [
@@ -246,7 +246,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/cse")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           companies: [
@@ -263,7 +263,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/pse")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           peoples: [
@@ -284,7 +284,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/lbs")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           companies: [
@@ -301,7 +301,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/cef")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           employees: [
@@ -337,7 +337,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/nac")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           company: "Cufinder Inc.",
@@ -348,7 +348,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/caa")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           activities: [
@@ -378,7 +378,7 @@ RSpec.describe Cufinder do
 
     stub_request(:post, "https://api.cufinder.io/v2/cja")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           jobs: [
