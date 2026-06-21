@@ -9,7 +9,7 @@ RSpec.describe Cufinder do
     # Mock successful responses for all services
     stub_request(:post, "https://api.cufinder.io/v2/cuf")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           domain: "example.com",
@@ -20,7 +20,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/lcuf")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           linkedin_url: "linkedin.com/company/example",
@@ -31,7 +31,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/dtc")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           company_name: "Example Corp",
@@ -42,7 +42,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/dte")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           emails: ["contact@example.com", "info@example.com"],
@@ -53,7 +53,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/ntp")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           phones: ["+1-555-123-4567", "+1-555-987-6543"],
@@ -64,7 +64,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/rel")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           person: {
@@ -82,7 +82,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/fcl")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           companies: [
@@ -104,7 +104,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/elf")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           fundraising_info: {
@@ -119,7 +119,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/car")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           annual_revenue: "$10M",
@@ -130,7 +130,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/fcc")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           subsidiaries: ["Subsidiary 1", "Subsidiary 2"],
@@ -141,7 +141,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/fts")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           technologies: ["React", "Node.js", "Python"],
@@ -152,7 +152,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/epp")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           person: {
@@ -170,7 +170,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/fwe")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           work_email: "jane.smith@techcorp.com",
@@ -181,7 +181,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/tep")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           person: {
@@ -199,7 +199,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/enc")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           company: {
@@ -216,7 +216,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/cec")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           countries: { "US" => 100, "CA" => 50 },
@@ -227,7 +227,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/clo")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           locations: [
@@ -246,7 +246,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/cse")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           companies: [
@@ -263,7 +263,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/pse")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           peoples: [
@@ -284,7 +284,7 @@ RSpec.describe Cufinder do
     
     stub_request(:post, "https://api.cufinder.io/v2/lbs")
       .with(headers: { "x-api-key" => api_key })
-      .to_return(status: 200, body: {
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
         status: 1,
         data: {
           companies: [
@@ -296,6 +296,121 @@ RSpec.describe Cufinder do
           ],
           confidence_level: 75,
           credit_count: 5
+        }
+      }.to_json)
+    
+    stub_request(:post, "https://api.cufinder.io/v2/cef")
+      .with(headers: { "x-api-key" => api_key })
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
+        status: 1,
+        data: {
+          employees: [
+            {
+              full_name: "John Doe",
+              first_name: "John",
+              last_name: "Doe",
+              linkedin_url: "linkedin.com/in/johndoe",
+              job_title: "Software Engineer",
+              company_name: "Example Corp",
+              company_industry: "Technology",
+              country: "US",
+              state: "CA",
+              city: "San Francisco"
+            },
+            {
+              full_name: "Jane Smith",
+              first_name: "Jane",
+              last_name: "Smith",
+              linkedin_url: "linkedin.com/in/janesmith",
+              job_title: "Product Manager",
+              company_name: "Example Corp",
+              company_industry: "Technology",
+              country: "US",
+              state: "NY",
+              city: "New York"
+            }
+          ],
+          confidence_level: 90,
+          credit_count: 80
+        }
+      }.to_json)
+    
+    stub_request(:post, "https://api.cufinder.io/v2/nac")
+      .with(headers: { "x-api-key" => api_key })
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
+        status: 1,
+        data: {
+          company: "Cufinder Inc.",
+          confidence_level: 95,
+          credit_count: 1
+        }
+      }.to_json)
+    
+    stub_request(:post, "https://api.cufinder.io/v2/caa")
+      .with(headers: { "x-api-key" => api_key })
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
+        status: 1,
+        data: {
+          activities: [
+            {
+              activity_url: "https://www.linkedin.com/posts/example-activity-123",
+              activity_id: "7462132400869888002",
+              author_name: "TechCorp",
+              author_type: "Organization",
+              author_url: "linkedin.com/company/techcorp",
+              activity_comments_count: 59,
+              activity_hashtags: ["#AI", "#Anthropic", "#CUFinder"],
+              activity_headline: "AI Growth Update",
+              activity_images: ["https://media.licdn.com/image.jpg"],
+              activity_is_video: true,
+              activity_posted_at: "2026-05-18T13:30:04.063Z",
+              activity_reactions_count: 3,
+              activity_reposts_count: 0,
+              activity_text: "Anthropic is projected to grow 222x by 2030",
+              activity_top_comments: [],
+              activity_videos: ["https://dms.licdn.com/video.mp4"]
+            }
+          ],
+          confidence_level: 90,
+          credit_count: 1
+        }
+      }.to_json)
+
+    stub_request(:post, "https://api.cufinder.io/v2/cja")
+      .with(headers: { "x-api-key" => api_key })
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
+        status: 1,
+        data: {
+          jobs: [
+            {
+              company: {
+                name: "Example Corp",
+                industry: "Technology",
+                website: "example.com",
+                linkedin: "linkedin.com/company/example",
+                followers_count: 5000,
+                employees: { range: "51-200" },
+                founded_date: "2015",
+                annual_revenue: "$10M",
+                funding_amount: 5000000,
+                main_location: {
+                  country: "US",
+                  state: "CA",
+                  city: "San Francisco"
+                }
+              },
+              job: {
+                job_id: "job-123",
+                title: "Software Engineer",
+                url: "https://example.com/jobs/123",
+                location: "San Francisco, CA",
+                posted_at: "2026-06-01T00:00:00.000Z",
+                posted_at_text: "20 days ago"
+              }
+            }
+          ],
+          confidence_level: 85,
+          credit_count: 98
         }
       }.to_json)
   end
@@ -524,6 +639,75 @@ RSpec.describe Cufinder do
       expect(result.companies.first).to be_a(Cufinder::Company)
       expect(result.companies.first.name).to eq("Local Business 1")
       expect(result.confidence_level).to eq(75)
+    end
+  end
+  
+  describe "CEF Service" do
+    it "finds company employees" do
+      result = client.cef(query: "Example Corp", page: 1)
+      
+      expect(result).to be_a(Cufinder::CefResponse)
+      expect(result.employees).to be_an(Array)
+      expect(result.employees.length).to eq(2)
+      expect(result.employees.first).to be_a(Cufinder::CefEmployee)
+      expect(result.employees.first.full_name).to eq("John Doe")
+      expect(result.employees.first.job_title).to eq("Software Engineer")
+      expect(result.employees.first.company_name).to eq("Example Corp")
+      expect(result.employees.first.country).to eq("US")
+      expect(result.confidence_level).to eq(90)
+    end
+  end
+  
+  describe "NAC Service" do
+    it "normalizes company name" do
+      result = client.nac(company: "cufinder inc.")
+      
+      expect(result).to be_a(Cufinder::NacResponse)
+      expect(result.company).to eq("Cufinder Inc.")
+      expect(result.confidence_level).to eq(95)
+      expect(result.credit_count).to eq(1)
+    end
+  end
+  
+  describe "CAA Service" do
+    it "gets company activities" do
+      result = client.caa(query: "TechCorp", page: 1)
+      
+      expect(result).to be_a(Cufinder::CaaResponse)
+      expect(result.activities).to be_an(Array)
+      expect(result.activities.length).to eq(1)
+      expect(result.activities.first).to be_a(Cufinder::CaaActivity)
+      expect(result.activities.first.activity_id).to eq("7462132400869888002")
+      expect(result.activities.first.author_name).to eq("TechCorp")
+      expect(result.activities.first.activity_comments_count).to eq(59)
+      expect(result.activities.first.activity_hashtags).to eq(["#AI", "#Anthropic", "#CUFinder"])
+      expect(result.activities.first.activity_is_video).to eq(true)
+      expect(result.activities.first.activity_reactions_count).to eq(3)
+      expect(result.confidence_level).to eq(90)
+    end
+  end
+
+  describe "CJA Service" do
+    it "searches company jobs" do
+      result = client.cja(name: "Example Corp", country: "US")
+      
+      expect(result).to be_a(Cufinder::CjaResponse)
+      expect(result.jobs).to be_an(Array)
+      expect(result.jobs.length).to eq(1)
+      expect(result.jobs.first).to be_a(Cufinder::CompanyJob)
+      expect(result.jobs.first.company).to be_a(Cufinder::CjaCompany)
+      expect(result.jobs.first.company.name).to eq("Example Corp")
+      expect(result.jobs.first.company.industry).to eq("Technology")
+      expect(result.jobs.first.company.followers_count).to eq(5000)
+      expect(result.jobs.first.company.funding_amount).to eq(5000000)
+      expect(result.jobs.first.company.main_location).to be_a(Cufinder::MainLocation)
+      expect(result.jobs.first.company.main_location.city).to eq("San Francisco")
+      expect(result.jobs.first.job).to be_a(Cufinder::CjaJob)
+      expect(result.jobs.first.job.title).to eq("Software Engineer")
+      expect(result.jobs.first.job.url).to eq("https://example.com/jobs/123")
+      expect(result.jobs.first.job.posted_at_text).to eq("20 days ago")
+      expect(result.confidence_level).to eq(85)
+      expect(result.credit_count).to eq(98)
     end
   end
   

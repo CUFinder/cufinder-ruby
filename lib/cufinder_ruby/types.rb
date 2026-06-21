@@ -601,4 +601,146 @@ module Cufinder
       @address = data["address"]
     end
   end
+
+  # CEF Employee
+  class CefEmployee
+    attr_accessor :full_name, :first_name, :last_name, :linkedin_url, :summary,
+                  :avatar, :country, :state, :city, :job_title,
+                  :job_title_categories, :company_name, :company_linkedin,
+                  :company_website, :company_size, :company_industry,
+                  :company_facebook, :company_twitter, :company_country,
+                  :company_state, :company_city
+    
+    def initialize(data = {})
+      @full_name = data["full_name"]
+      @first_name = data["first_name"]
+      @last_name = data["last_name"]
+      @linkedin_url = data["linkedin_url"]
+      @summary = data["summary"]
+      @avatar = data["avatar"]
+      @country = data["country"]
+      @state = data["state"]
+      @city = data["city"]
+      @job_title = data["job_title"]
+      @job_title_categories = data["job_title_categories"]
+      @company_name = data["company_name"]
+      @company_linkedin = data["company_linkedin"]
+      @company_website = data["company_website"]
+      @company_size = data["company_size"]
+      @company_industry = data["company_industry"]
+      @company_facebook = data["company_facebook"]
+      @company_twitter = data["company_twitter"]
+      @company_country = data["company_country"]
+      @company_state = data["company_state"]
+      @company_city = data["company_city"]
+    end
+  end
+
+  class CefResponse < BaseResponse
+    attr_accessor :employees
+    
+    def initialize(data = {})
+      super(data)
+      @employees = (data["employees"] || []).map { |e| CefEmployee.new(e) }
+    end
+  end
+
+  class NacResponse < BaseResponse
+    attr_accessor :company
+    
+    def initialize(data = {})
+      super(data)
+      @company = data["company"]
+    end
+  end
+
+  # CAA Activity
+  class CaaActivity
+    attr_accessor :activity_url, :activity_id, :author_name, :author_type, :author_url,
+                  :activity_comments_count, :activity_hashtags, :activity_headline,
+                  :activity_images, :activity_is_video, :activity_posted_at,
+                  :activity_reactions_count, :activity_reposts_count, :activity_text,
+                  :activity_top_comments, :activity_videos
+    
+    def initialize(data = {})
+      @activity_url = data["activity_url"]
+      @activity_id = data["activity_id"]
+      @author_name = data["author_name"]
+      @author_type = data["author_type"]
+      @author_url = data["author_url"]
+      @activity_comments_count = data["activity_comments_count"]
+      @activity_hashtags = data["activity_hashtags"] || []
+      @activity_headline = data["activity_headline"]
+      @activity_images = data["activity_images"] || []
+      @activity_is_video = data["activity_is_video"]
+      @activity_posted_at = data["activity_posted_at"]
+      @activity_reactions_count = data["activity_reactions_count"]
+      @activity_reposts_count = data["activity_reposts_count"]
+      @activity_text = data["activity_text"]
+      @activity_top_comments = data["activity_top_comments"] || []
+      @activity_videos = data["activity_videos"] || []
+    end
+  end
+
+  class CaaResponse < BaseResponse
+    attr_accessor :activities
+    
+    def initialize(data = {})
+      super(data)
+      @activities = (data["activities"] || []).map { |a| CaaActivity.new(a) }
+    end
+  end
+
+  # CJA Company (within job listing)
+  class CjaCompany
+    attr_accessor :name, :industry, :website, :linkedin, :followers_count,
+                  :employees, :founded_date, :annual_revenue, :funding_amount,
+                  :main_location
+    
+    def initialize(data = {})
+      @name = data["name"]
+      @industry = data["industry"]
+      @website = data["website"]
+      @linkedin = data["linkedin"]
+      @followers_count = data["followers_count"]
+      @employees = data["employees"]
+      @founded_date = data["founded_date"]
+      @annual_revenue = data["annual_revenue"]
+      @funding_amount = data["funding_amount"]
+      @main_location = data["main_location"] ? MainLocation.new(data["main_location"]) : nil
+    end
+  end
+
+  # CJA Job listing
+  class CjaJob
+    attr_accessor :job_id, :title, :url, :location, :posted_at, :posted_at_text
+    
+    def initialize(data = {})
+      @job_id = data["job_id"]
+      @title = data["title"]
+      @url = data["url"]
+      @location = data["location"]
+      @posted_at = data["posted_at"]
+      @posted_at_text = data["posted_at_text"]
+    end
+  end
+
+  # CJA Company Job (combined company + job)
+  class CompanyJob
+    attr_accessor :company, :job
+    
+    def initialize(data = {})
+      @company = data["company"] ? CjaCompany.new(data["company"]) : nil
+      @job = data["job"] ? CjaJob.new(data["job"]) : nil
+    end
+  end
+
+  class CjaResponse < BaseResponse
+    attr_accessor :jobs
+    
+    def initialize(data = {})
+      super(data)
+      @jobs = (data["jobs"] || []).map { |j| CompanyJob.new(j) }
+    end
+  end
 end

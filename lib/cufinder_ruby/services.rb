@@ -228,6 +228,36 @@ module Cufinder
       response = @client.post("/naa", params)
       NaaResponse.new(response)
     end
+
+    # CEF Service - Company Employees Finder
+    def find_company_employees(params)
+      validate_required(params, [:query, :page])
+      
+      response = @client.post("/cef", params)
+      CefResponse.new(response)
+    end
+
+    # NAC Service - Company Name Normalizer
+    def normalize_company_name(params)
+      validate_required(params, [:company])
+      
+      response = @client.post("/nac", params)
+      NacResponse.new(response)
+    end
+
+    # CAA Service - Company Activities API
+    def get_company_activities(params)
+      validate_required(params, [:query, :page])
+      
+      response = @client.post("/caa", params)
+      CaaResponse.new(response)
+    end
+
+    # CJA Service - Company Jobs API
+    def search_company_jobs(params)
+      response = @client.post("/cja", params)
+      CjaResponse.new(response)
+    end
     
     private
     
