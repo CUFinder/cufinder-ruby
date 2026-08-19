@@ -290,6 +290,14 @@ module Cufinder
       response = @client.post("/clf", params)
       ClfResponse.new(response)
     end
+
+    # NAP Service - Person Name Normalizer
+    def normalize_person_name(params)
+      validate_required(params, [:person_name])
+      
+      response = @client.post("/nap", params)
+      NapResponse.new(response)
+    end
     
     private
     

@@ -885,4 +885,14 @@ module Cufinder
       @profiles = (data["profiles"] || []).map { |p| ClfProfile.new(p) }
     end
   end
+
+  # NAP - Person Name Normalizer
+  class NapResponse < BaseResponse
+    attr_accessor :normalized_name
+
+    def initialize(data = {})
+      super(data)
+      @normalized_name = data["normalized_name"]
+    end
+  end
 end

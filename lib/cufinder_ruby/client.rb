@@ -173,5 +173,9 @@ module Cufinder
     def clf(**params)
       @services.find_contact_lookalikes(params)
     end
+
+    def nap(**params)
+      @services.normalize_person_name(params)
+    end
   end
 end
