@@ -185,5 +185,9 @@ module Cufinder
     def gdc(**params)
       @services.gives_demo(params)
     end
+
+    def cot(**params)
+      @services.offers_free_trial(params)
+    end
   end
 end

@@ -314,6 +314,14 @@ module Cufinder
       response = @client.post("/gdc", params)
       GdcResponse.new(response)
     end
+
+    # COT Service - Offers Free Trial Checker
+    def offers_free_trial(params)
+      validate_required(params, [:url])
+      
+      response = @client.post("/cot", params)
+      CotResponse.new(response)
+    end
     
     private
     

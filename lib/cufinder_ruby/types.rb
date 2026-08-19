@@ -915,4 +915,14 @@ module Cufinder
       @offers_demo = data["offers_demo"]
     end
   end
+
+  # COT - Offers Free Trial Checker
+  class CotResponse < BaseResponse
+    attr_accessor :offers_free_trial
+
+    def initialize(data = {})
+      super(data)
+      @offers_free_trial = data["offers_free_trial"]
+    end
+  end
 end
