@@ -161,5 +161,9 @@ module Cufinder
     def psa(**params)
       @services.get_contact_signals(params)
     end
+
+    def csa(**params)
+      @services.get_company_signals(params)
+    end
   end
 end

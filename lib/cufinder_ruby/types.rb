@@ -777,4 +777,32 @@ module Cufinder
       @contacts = (data["contacts"] || []).map { |c| ContactSignal.new(c) }
     end
   end
+
+  # CSA Company Signal
+  class CompanySignal
+    attr_accessor :name, :website, :domain, :employees, :industry, :overview,
+                  :type, :main_location, :social, :signal
+
+    def initialize(data = {})
+      @name = data["name"]
+      @website = data["website"]
+      @domain = data["domain"]
+      @employees = data["employees"]
+      @industry = data["industry"]
+      @overview = data["overview"]
+      @type = data["type"]
+      @main_location = data["main_location"] ? MainLocation.new(data["main_location"]) : nil
+      @social = data["social"]
+      @signal = data["signal"] ? Signal.new(data["signal"]) : nil
+    end
+  end
+
+  class CsaResponse < BaseResponse
+    attr_accessor :companies
+
+    def initialize(data = {})
+      super(data)
+      @companies = (data["companies"] || []).map { |c| CompanySignal.new(c) }
+    end
+  end
 end
