@@ -53,7 +53,7 @@ client = Cufinder::Client.new(
 
 ## API Reference
 
-This SDK covers all 32 Cufinder API (v2) endpoints:
+This SDK covers all 40 Cufinder API (v2) endpoints:
 
 - **CUF** - [Company Name to Domain](https://apidoc.cufinder.io/apis/company-name-to-domain)
 - **LCUF** - [LinkedIn Company URL Finder](https://apidoc.cufinder.io/apis/company-linkedin-url-finder)
@@ -87,6 +87,14 @@ This SDK covers all 32 Cufinder API (v2) endpoints:
 - **NAC** - [Company Name Normalizer](https://apidoc.cufinder.io/apis/company-name-normalizer)
 - **CAA** - [Company Activities API](https://apidoc.cufinder.io/apis/company-activities-api)
 - **CJA** - [Company Jobs API](https://apidoc.cufinder.io/apis/company-jobs-api)
+- **PSA** - [Contact Signals API](https://apidoc.cufinder.io/apis/contact-signals-api)
+- **CSA** - [Company Signals API](https://apidoc.cufinder.io/apis/company-signals-api)
+- **JCA** - [Job Changes API](https://apidoc.cufinder.io/apis/job-changes-api)
+- **CLF** - [Contact Lookalikes API](https://apidoc.cufinder.io/apis/contact-lookalikes-api)
+- **NAP** - [Person Name Normalizer](https://apidoc.cufinder.io/apis/person-name-normalizer)
+- **NAU** - [URL Normalizer](https://apidoc.cufinder.io/apis/url-normalizer)
+- **GDC** - [Gives Demo Checker](https://apidoc.cufinder.io/apis/gives-demo-checker)
+- **COT** - [Offers Free Trial Checker](https://apidoc.cufinder.io/apis/offers-free-trial-checker)
 
 
 **CUF - Company Name to Domain**
@@ -387,6 +395,86 @@ Returns company's job listings
 ```ruby
 result = client.cja(name: "google", country: "united states", page: 1)
 puts result
+```
+
+**PSA - Contact Signals API**
+
+Returns contacts based on company signals
+
+```ruby
+result = client.psa(signal_name: "employee_growth", time_frame: 90, bucket: "high", page: 1)
+result.contacts.each do |contact|
+  puts "#{contact.full_name} - #{contact.company['name']}"
+end
+```
+
+**CSA - Company Signals API**
+
+Returns companies based on signals
+
+```ruby
+result = client.csa(signal_name: "employee_growth", time_frame: 90, bucket: "high", page: 1)
+result.companies.each do |company|
+  puts "#{company.name} - #{company.domain}"
+end
+```
+
+**JCA - Job Changes API**
+
+Returns job changes within a date range
+
+```ruby
+result = client.jca(start_date: "2026-01-01", end_date: "2026-08-16", type: "promotion")
+result.job_changes.each do |change|
+  puts "#{change.type}: #{change.from.title} -> #{change.to.title}"
+end
+```
+
+**CLF - Contact Lookalikes API**
+
+Returns similar contacts based on a query
+
+```ruby
+result = client.clf(query: "linkedin.com/in/mortezaheydari1997")
+result.profiles.each do |profile|
+  puts "#{profile.full_name} - #{profile.company_name}"
+end
+```
+
+**NAP - Person Name Normalizer**
+
+Normalizes a person name
+
+```ruby
+result = client.nap(person_name: "morteza heydari")
+puts result.normalized_name
+```
+
+**NAU - URL Normalizer**
+
+Normalizes a URL
+
+```ruby
+result = client.nau(url: "https://www.cufinder.io/about-us")
+puts result.normalized_url
+```
+
+**GDC - Gives Demo Checker**
+
+Checks if a company offers demos
+
+```ruby
+result = client.gdc(url: "https://www.stripe.com")
+puts result.offers_demo
+```
+
+**COT - Offers Free Trial Checker**
+
+Checks if a company offers a free trial
+
+```ruby
+result = client.cot(url: "https://www.stripe.com")
+puts result.offers_free_trial
 ```
 
 ## Error Handling

@@ -258,6 +258,70 @@ module Cufinder
       response = @client.post("/cja", params)
       CjaResponse.new(response)
     end
+
+    # PSA Service - Contact Signals API
+    def get_contact_signals(params)
+      validate_required(params, [:signal_name, :time_frame, :bucket])
+      
+      response = @client.post("/psa", params)
+      PsaResponse.new(response)
+    end
+
+    # CSA Service - Company Signals API
+    def get_company_signals(params)
+      validate_required(params, [:signal_name, :time_frame, :bucket])
+      
+      response = @client.post("/csa", params)
+      CsaResponse.new(response)
+    end
+
+    # JCA Service - Job Changes API
+    def get_job_changes(params)
+      validate_required(params, [:start_date, :end_date])
+      
+      response = @client.post("/jca", params)
+      JcaResponse.new(response)
+    end
+
+    # CLF Service - Contact Lookalikes API
+    def find_contact_lookalikes(params)
+      validate_required(params, [:query])
+      
+      response = @client.post("/clf", params)
+      ClfResponse.new(response)
+    end
+
+    # NAP Service - Person Name Normalizer
+    def normalize_person_name(params)
+      validate_required(params, [:person_name])
+      
+      response = @client.post("/nap", params)
+      NapResponse.new(response)
+    end
+
+    # NAU Service - URL Normalizer
+    def normalize_url(params)
+      validate_required(params, [:url])
+      
+      response = @client.post("/nau", params)
+      NauResponse.new(response)
+    end
+
+    # GDC Service - Gives Demo Checker
+    def gives_demo(params)
+      validate_required(params, [:url])
+      
+      response = @client.post("/gdc", params)
+      GdcResponse.new(response)
+    end
+
+    # COT Service - Offers Free Trial Checker
+    def offers_free_trial(params)
+      validate_required(params, [:url])
+      
+      response = @client.post("/cot", params)
+      CotResponse.new(response)
+    end
     
     private
     

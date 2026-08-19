@@ -157,5 +157,37 @@ module Cufinder
     def cja(**params)
       @services.search_company_jobs(params)
     end
+
+    def psa(**params)
+      @services.get_contact_signals(params)
+    end
+
+    def csa(**params)
+      @services.get_company_signals(params)
+    end
+
+    def jca(**params)
+      @services.get_job_changes(params)
+    end
+
+    def clf(**params)
+      @services.find_contact_lookalikes(params)
+    end
+
+    def nap(**params)
+      @services.normalize_person_name(params)
+    end
+
+    def nau(**params)
+      @services.normalize_url(params)
+    end
+
+    def gdc(**params)
+      @services.gives_demo(params)
+    end
+
+    def cot(**params)
+      @services.offers_free_trial(params)
+    end
   end
 end

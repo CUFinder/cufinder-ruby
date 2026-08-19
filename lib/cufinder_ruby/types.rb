@@ -743,4 +743,186 @@ module Cufinder
       @jobs = (data["jobs"] || []).map { |j| CompanyJob.new(j) }
     end
   end
+
+  # Signal model
+  class Signal
+    attr_accessor :name, :time_frame, :bucket
+
+    def initialize(data = {})
+      @name = data["name"]
+      @time_frame = data["time_frame"]
+      @bucket = data["bucket"]
+    end
+  end
+
+  # PSA Contact Signal
+  class ContactSignal
+    attr_accessor :full_name, :current_job, :company, :location, :social, :signal
+
+    def initialize(data = {})
+      @full_name = data["full_name"]
+      @current_job = data["current_job"]
+      @company = data["company"]
+      @location = data["location"]
+      @social = data["social"]
+      @signal = data["signal"] ? Signal.new(data["signal"]) : nil
+    end
+  end
+
+  class PsaResponse < BaseResponse
+    attr_accessor :contacts
+
+    def initialize(data = {})
+      super(data)
+      @contacts = (data["contacts"] || []).map { |c| ContactSignal.new(c) }
+    end
+  end
+
+  # CSA Company Signal
+  class CompanySignal
+    attr_accessor :name, :website, :domain, :employees, :industry, :overview,
+                  :type, :main_location, :social, :signal
+
+    def initialize(data = {})
+      @name = data["name"]
+      @website = data["website"]
+      @domain = data["domain"]
+      @employees = data["employees"]
+      @industry = data["industry"]
+      @overview = data["overview"]
+      @type = data["type"]
+      @main_location = data["main_location"] ? MainLocation.new(data["main_location"]) : nil
+      @social = data["social"]
+      @signal = data["signal"] ? Signal.new(data["signal"]) : nil
+    end
+  end
+
+  class CsaResponse < BaseResponse
+    attr_accessor :companies
+
+    def initialize(data = {})
+      super(data)
+      @companies = (data["companies"] || []).map { |c| CompanySignal.new(c) }
+    end
+  end
+
+  # JCA Job Change company snapshot
+  class JobChangeCompanySnapshot
+    attr_accessor :company_linkedin_url, :company_linkedin_id, :company_name, :title
+
+    def initialize(data = {})
+      @company_linkedin_url = data["company_linkedin_url"]
+      @company_linkedin_id = data["company_linkedin_id"]
+      @company_name = data["company_name"]
+      @title = data["title"]
+    end
+  end
+
+  # JCA Job Change
+  class JobChange
+    attr_accessor :type, :linkedin_url, :detected_at, :from, :to
+
+    def initialize(data = {})
+      @type = data["type"]
+      @linkedin_url = data["linkedin_url"]
+      @detected_at = data["detected_at"]
+      @from = data["from"] ? JobChangeCompanySnapshot.new(data["from"]) : nil
+      @to = data["to"] ? JobChangeCompanySnapshot.new(data["to"]) : nil
+    end
+  end
+
+  class JcaResponse < BaseResponse
+    attr_accessor :job_changes
+
+    def initialize(data = {})
+      super(data)
+      @job_changes = (data["job_changes"] || []).map { |j| JobChange.new(j) }
+    end
+  end
+
+  # CLF Contact Lookalike profile
+  class ClfProfile
+    attr_accessor :first_name, :last_name, :full_name, :linkedin_url, :summary,
+                  :followers_count, :facebook, :twitter, :avatar, :country, :state,
+                  :city, :job_title, :job_title_categories, :company_name,
+                  :company_linkedin, :company_website, :company_size,
+                  :company_industry, :company_facebook, :company_twitter,
+                  :company_country, :company_state, :company_city
+
+    def initialize(data = {})
+      @first_name = data["first_name"]
+      @last_name = data["last_name"]
+      @full_name = data["full_name"]
+      @linkedin_url = data["linkedin_url"]
+      @summary = data["summary"]
+      @followers_count = data["followers_count"]
+      @facebook = data["facebook"]
+      @twitter = data["twitter"]
+      @avatar = data["avatar"]
+      @country = data["country"]
+      @state = data["state"]
+      @city = data["city"]
+      @job_title = data["job_title"]
+      @job_title_categories = data["job_title_categories"]
+      @company_name = data["company_name"]
+      @company_linkedin = data["company_linkedin"]
+      @company_website = data["company_website"]
+      @company_size = data["company_size"]
+      @company_industry = data["company_industry"]
+      @company_facebook = data["company_facebook"]
+      @company_twitter = data["company_twitter"]
+      @company_country = data["company_country"]
+      @company_state = data["company_state"]
+      @company_city = data["company_city"]
+    end
+  end
+
+  class ClfResponse < BaseResponse
+    attr_accessor :profiles
+
+    def initialize(data = {})
+      super(data)
+      @profiles = (data["profiles"] || []).map { |p| ClfProfile.new(p) }
+    end
+  end
+
+  # NAP - Person Name Normalizer
+  class NapResponse < BaseResponse
+    attr_accessor :normalized_name
+
+    def initialize(data = {})
+      super(data)
+      @normalized_name = data["normalized_name"]
+    end
+  end
+
+  # NAU - URL Normalizer
+  class NauResponse < BaseResponse
+    attr_accessor :normalized_url
+
+    def initialize(data = {})
+      super(data)
+      @normalized_url = data["normalized_url"]
+    end
+  end
+
+  # GDC - Gives Demo Checker
+  class GdcResponse < BaseResponse
+    attr_accessor :offers_demo
+
+    def initialize(data = {})
+      super(data)
+      @offers_demo = data["offers_demo"]
+    end
+  end
+
+  # COT - Offers Free Trial Checker
+  class CotResponse < BaseResponse
+    attr_accessor :offers_free_trial
+
+    def initialize(data = {})
+      super(data)
+      @offers_free_trial = data["offers_free_trial"]
+    end
+  end
 end

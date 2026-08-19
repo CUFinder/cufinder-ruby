@@ -413,6 +413,187 @@ RSpec.describe Cufinder do
           credit_count: 98
         }
       }.to_json)
+
+    stub_request(:post, "https://api.cufinder.io/v2/psa")
+      .with(headers: { "x-api-key" => api_key })
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
+        status: 1,
+        data: {
+          contacts: [
+            {
+              full_name: "John Doe",
+              current_job: { title: "Software Engineer" },
+              company: {
+                name: "TechCorp",
+                linkedin: "linkedin.com/company/techcorp",
+                website: "https://techcorp.com",
+                industry: "software development",
+                main_location: {
+                  country: "united states",
+                  state: "california",
+                  city: "san francisco"
+                }
+              },
+              location: {
+                country: "united states",
+                state: "california",
+                city: "san francisco"
+              },
+              signal: {
+                name: "employee_growth",
+                time_frame: 90,
+                bucket: "high"
+              }
+            }
+          ],
+          query: {
+            signal_name: "employee_growth",
+            time_frame: 90,
+            bucket: "high",
+            page: 1
+          },
+          credit_count: 1,
+          meta_data: { total_results: 1 }
+        }
+      }.to_json)
+
+    stub_request(:post, "https://api.cufinder.io/v2/csa")
+      .with(headers: { "x-api-key" => api_key })
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
+        status: 1,
+        data: {
+          companies: [
+            {
+              name: "TechCorp",
+              website: "https://techcorp.com",
+              domain: "techcorp.com",
+              industry: "software development",
+              overview: "Enterprise software company",
+              type: "private",
+              employees: { range: "1001-5000" },
+              main_location: {
+                country: "united states",
+                state: "california",
+                city: "san francisco",
+                address: "123 Tech St"
+              },
+              signal: {
+                name: "employee_growth",
+                time_frame: 90,
+                bucket: "high"
+              }
+            }
+          ],
+          query: {
+            signal_name: "employee_growth",
+            time_frame: 90,
+            bucket: "high",
+            page: 1
+          },
+          credit_count: 1,
+          meta_data: { total_results: 1 }
+        }
+      }.to_json)
+
+    stub_request(:post, "https://api.cufinder.io/v2/jca")
+      .with(headers: { "x-api-key" => api_key })
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
+        status: 1,
+        data: {
+          job_changes: [
+            {
+              type: "promotion",
+              linkedin_url: "https://linkedin.com/in/john-doe",
+              detected_at: "2026-08-01T12:00:00Z",
+              from: {
+                company_linkedin_url: "https://linkedin.com/company/techcorp",
+                company_linkedin_id: "12345",
+                company_name: "TechCorp",
+                title: "Software Engineer"
+              },
+              to: {
+                company_linkedin_url: "https://linkedin.com/company/techcorp",
+                company_linkedin_id: "12345",
+                company_name: "TechCorp",
+                title: "Senior Software Engineer"
+              }
+            }
+          ],
+          query: {
+            start_date: "2026-01-01",
+            end_date: "2026-08-16",
+            type: "promotion"
+          },
+          credit_count: 1,
+          meta_data: { total_results: 1 }
+        }
+      }.to_json)
+
+    stub_request(:post, "https://api.cufinder.io/v2/clf")
+      .with(headers: { "x-api-key" => api_key })
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
+        status: 1,
+        data: {
+          profiles: [
+            {
+              full_name: "Morteza Heydari",
+              linkedin_url: "https://linkedin.com/in/mortezaheydari1997",
+              job_title: "Founder & CEO",
+              company_name: "CUFinder",
+              country: "united states",
+              state: "new york",
+              city: "new york"
+            }
+          ],
+          query: "linkedin.com/in/mortezaheydari1997",
+          credit_count: 1,
+          meta_data: { total_results: 1 }
+        }
+      }.to_json)
+
+    stub_request(:post, "https://api.cufinder.io/v2/nap")
+      .with(headers: { "x-api-key" => api_key })
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
+        status: 1,
+        data: {
+          normalized_name: "Morteza Heydari",
+          query: "morteza heydari",
+          credit_count: 1
+        }
+      }.to_json)
+
+    stub_request(:post, "https://api.cufinder.io/v2/nau")
+      .with(headers: { "x-api-key" => api_key })
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
+        status: 1,
+        data: {
+          normalized_url: "https://www.cufinder.io/about-us",
+          query: "https://www.cufinder.io/about-us",
+          credit_count: 1
+        }
+      }.to_json)
+
+    stub_request(:post, "https://api.cufinder.io/v2/gdc")
+      .with(headers: { "x-api-key" => api_key })
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
+        status: 1,
+        data: {
+          offers_demo: "yes",
+          query: "https://www.stripe.com",
+          credit_count: 1
+        }
+      }.to_json)
+
+    stub_request(:post, "https://api.cufinder.io/v2/cot")
+      .with(headers: { "x-api-key" => api_key })
+      .to_return(status: 200, headers: { 'Content-Type' => 'application/json' }, body: {
+        status: 1,
+        data: {
+          offers_free_trial: "yes",
+          query: "https://www.stripe.com",
+          credit_count: 1
+        }
+      }.to_json)
   end
   
   describe "CUF Service" do
@@ -711,6 +892,122 @@ RSpec.describe Cufinder do
     end
   end
   
+  describe "PSA Service" do
+    it "gets contact signals" do
+      result = client.psa(signal_name: "employee_growth", time_frame: 90, bucket: "high", page: 1)
+      
+      expect(result).to be_a(Cufinder::PsaResponse)
+      expect(result.contacts).to be_an(Array)
+      expect(result.contacts.length).to eq(1)
+      expect(result.contacts.first).to be_a(Cufinder::ContactSignal)
+      expect(result.contacts.first.full_name).to eq("John Doe")
+      expect(result.contacts.first.current_job["title"]).to eq("Software Engineer")
+      expect(result.contacts.first.company["name"]).to eq("TechCorp")
+      expect(result.contacts.first.company["industry"]).to eq("software development")
+      expect(result.contacts.first.signal).to be_a(Cufinder::Signal)
+      expect(result.contacts.first.signal.name).to eq("employee_growth")
+      expect(result.contacts.first.signal.time_frame).to eq(90)
+      expect(result.contacts.first.signal.bucket).to eq("high")
+      expect(result.credit_count).to eq(1)
+    end
+  end
+  
+  describe "CSA Service" do
+    it "gets company signals" do
+      result = client.csa(signal_name: "employee_growth", time_frame: 90, bucket: "high", page: 1)
+      
+      expect(result).to be_a(Cufinder::CsaResponse)
+      expect(result.companies).to be_an(Array)
+      expect(result.companies.length).to eq(1)
+      expect(result.companies.first).to be_a(Cufinder::CompanySignal)
+      expect(result.companies.first.name).to eq("TechCorp")
+      expect(result.companies.first.domain).to eq("techcorp.com")
+      expect(result.companies.first.industry).to eq("software development")
+      expect(result.companies.first.employees["range"]).to eq("1001-5000")
+      expect(result.companies.first.main_location).to be_a(Cufinder::MainLocation)
+      expect(result.companies.first.main_location.city).to eq("san francisco")
+      expect(result.companies.first.signal).to be_a(Cufinder::Signal)
+      expect(result.companies.first.signal.name).to eq("employee_growth")
+      expect(result.credit_count).to eq(1)
+    end
+  end
+  
+  describe "JCA Service" do
+    it "gets job changes" do
+      result = client.jca(start_date: "2026-01-01", end_date: "2026-08-16", type: "promotion")
+      
+      expect(result).to be_a(Cufinder::JcaResponse)
+      expect(result.job_changes).to be_an(Array)
+      expect(result.job_changes.length).to eq(1)
+      expect(result.job_changes.first).to be_a(Cufinder::JobChange)
+      expect(result.job_changes.first.type).to eq("promotion")
+      expect(result.job_changes.first.linkedin_url).to eq("https://linkedin.com/in/john-doe")
+      expect(result.job_changes.first.from).to be_a(Cufinder::JobChangeCompanySnapshot)
+      expect(result.job_changes.first.from.company_name).to eq("TechCorp")
+      expect(result.job_changes.first.from.title).to eq("Software Engineer")
+      expect(result.job_changes.first.to).to be_a(Cufinder::JobChangeCompanySnapshot)
+      expect(result.job_changes.first.to.title).to eq("Senior Software Engineer")
+      expect(result.credit_count).to eq(1)
+    end
+  end
+  
+  describe "CLF Service" do
+    it "finds contact lookalikes" do
+      result = client.clf(query: "linkedin.com/in/mortezaheydari1997")
+      
+      expect(result).to be_a(Cufinder::ClfResponse)
+      expect(result.profiles).to be_an(Array)
+      expect(result.profiles.length).to eq(1)
+      expect(result.profiles.first).to be_a(Cufinder::ClfProfile)
+      expect(result.profiles.first.full_name).to eq("Morteza Heydari")
+      expect(result.profiles.first.linkedin_url).to eq("https://linkedin.com/in/mortezaheydari1997")
+      expect(result.profiles.first.job_title).to eq("Founder & CEO")
+      expect(result.profiles.first.company_name).to eq("CUFinder")
+      expect(result.profiles.first.city).to eq("new york")
+      expect(result.credit_count).to eq(1)
+    end
+  end
+  
+  describe "NAP Service" do
+    it "normalizes a person name" do
+      result = client.nap(person_name: "morteza heydari")
+      
+      expect(result).to be_a(Cufinder::NapResponse)
+      expect(result.normalized_name).to eq("Morteza Heydari")
+      expect(result.credit_count).to eq(1)
+    end
+  end
+  
+  describe "NAU Service" do
+    it "normalizes a URL" do
+      result = client.nau(url: "https://www.cufinder.io/about-us")
+      
+      expect(result).to be_a(Cufinder::NauResponse)
+      expect(result.normalized_url).to eq("https://www.cufinder.io/about-us")
+      expect(result.credit_count).to eq(1)
+    end
+  end
+  
+  describe "GDC Service" do
+    it "checks if a company gives demos" do
+      result = client.gdc(url: "https://www.stripe.com")
+      
+      expect(result).to be_a(Cufinder::GdcResponse)
+      expect(result.offers_demo).to eq("yes")
+      expect(result.credit_count).to eq(1)
+    end
+  end
+  
+  describe "COT Service" do
+    it "checks if a company offers a free trial" do
+      result = client.cot(url: "https://www.stripe.com")
+      
+      expect(result).to be_a(Cufinder::CotResponse)
+      expect(result.offers_free_trial).to eq("yes")
+      expect(result.credit_count).to eq(1)
+    end
+  end
+  
   describe "Error Handling" do
     it "handles authentication errors" do
       stub_request(:post, "https://api.cufinder.io/v2/cuf")
@@ -752,6 +1049,66 @@ RSpec.describe Cufinder do
       expect {
         client.cuf(company_name: "", country_code: "US")
       }.to raise_error(Cufinder::ValidationError, /Missing required fields/)
+    end
+    
+    it "validates PSA required parameters" do
+      expect {
+        client.psa(time_frame: 90, bucket: "high")
+      }.to raise_error(Cufinder::ValidationError, /signal_name/)
+      
+      expect {
+        client.psa(signal_name: "employee_growth", time_frame: 90)
+      }.to raise_error(Cufinder::ValidationError, /bucket/)
+    end
+    
+    it "validates CSA required parameters" do
+      expect {
+        client.csa(time_frame: 90, bucket: "high")
+      }.to raise_error(Cufinder::ValidationError, /signal_name/)
+      
+      expect {
+        client.csa(signal_name: "employee_growth")
+      }.to raise_error(Cufinder::ValidationError, /bucket/)
+    end
+    
+    it "validates JCA required parameters" do
+      expect {
+        client.jca(end_date: "2026-08-16")
+      }.to raise_error(Cufinder::ValidationError, /start_date/)
+      
+      expect {
+        client.jca(start_date: "2026-01-01")
+      }.to raise_error(Cufinder::ValidationError, /end_date/)
+    end
+    
+    it "validates CLF required parameters" do
+      expect {
+        client.clf(query: "")
+      }.to raise_error(Cufinder::ValidationError, /query/)
+    end
+    
+    it "validates NAP required parameters" do
+      expect {
+        client.nap(person_name: "")
+      }.to raise_error(Cufinder::ValidationError, /person_name/)
+    end
+    
+    it "validates NAU required parameters" do
+      expect {
+        client.nau(url: "")
+      }.to raise_error(Cufinder::ValidationError, /url/)
+    end
+    
+    it "validates GDC required parameters" do
+      expect {
+        client.gdc(url: "")
+      }.to raise_error(Cufinder::ValidationError, /url/)
+    end
+    
+    it "validates COT required parameters" do
+      expect {
+        client.cot(url: "")
+      }.to raise_error(Cufinder::ValidationError, /url/)
     end
   end
 end
