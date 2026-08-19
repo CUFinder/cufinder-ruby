@@ -274,6 +274,14 @@ module Cufinder
       response = @client.post("/csa", params)
       CsaResponse.new(response)
     end
+
+    # JCA Service - Job Changes API
+    def get_job_changes(params)
+      validate_required(params, [:start_date, :end_date])
+      
+      response = @client.post("/jca", params)
+      JcaResponse.new(response)
+    end
     
     private
     

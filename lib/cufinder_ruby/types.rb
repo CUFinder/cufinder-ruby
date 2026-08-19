@@ -805,4 +805,38 @@ module Cufinder
       @companies = (data["companies"] || []).map { |c| CompanySignal.new(c) }
     end
   end
+
+  # JCA Job Change company snapshot
+  class JobChangeCompanySnapshot
+    attr_accessor :company_linkedin_url, :company_linkedin_id, :company_name, :title
+
+    def initialize(data = {})
+      @company_linkedin_url = data["company_linkedin_url"]
+      @company_linkedin_id = data["company_linkedin_id"]
+      @company_name = data["company_name"]
+      @title = data["title"]
+    end
+  end
+
+  # JCA Job Change
+  class JobChange
+    attr_accessor :type, :linkedin_url, :detected_at, :from, :to
+
+    def initialize(data = {})
+      @type = data["type"]
+      @linkedin_url = data["linkedin_url"]
+      @detected_at = data["detected_at"]
+      @from = data["from"] ? JobChangeCompanySnapshot.new(data["from"]) : nil
+      @to = data["to"] ? JobChangeCompanySnapshot.new(data["to"]) : nil
+    end
+  end
+
+  class JcaResponse < BaseResponse
+    attr_accessor :job_changes
+
+    def initialize(data = {})
+      super(data)
+      @job_changes = (data["job_changes"] || []).map { |j| JobChange.new(j) }
+    end
+  end
 end

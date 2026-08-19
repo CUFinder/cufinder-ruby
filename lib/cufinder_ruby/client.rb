@@ -165,5 +165,9 @@ module Cufinder
     def csa(**params)
       @services.get_company_signals(params)
     end
+
+    def jca(**params)
+      @services.get_job_changes(params)
+    end
   end
 end
