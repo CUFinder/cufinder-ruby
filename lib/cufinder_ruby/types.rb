@@ -839,4 +839,50 @@ module Cufinder
       @job_changes = (data["job_changes"] || []).map { |j| JobChange.new(j) }
     end
   end
+
+  # CLF Contact Lookalike profile
+  class ClfProfile
+    attr_accessor :first_name, :last_name, :full_name, :linkedin_url, :summary,
+                  :followers_count, :facebook, :twitter, :avatar, :country, :state,
+                  :city, :job_title, :job_title_categories, :company_name,
+                  :company_linkedin, :company_website, :company_size,
+                  :company_industry, :company_facebook, :company_twitter,
+                  :company_country, :company_state, :company_city
+
+    def initialize(data = {})
+      @first_name = data["first_name"]
+      @last_name = data["last_name"]
+      @full_name = data["full_name"]
+      @linkedin_url = data["linkedin_url"]
+      @summary = data["summary"]
+      @followers_count = data["followers_count"]
+      @facebook = data["facebook"]
+      @twitter = data["twitter"]
+      @avatar = data["avatar"]
+      @country = data["country"]
+      @state = data["state"]
+      @city = data["city"]
+      @job_title = data["job_title"]
+      @job_title_categories = data["job_title_categories"]
+      @company_name = data["company_name"]
+      @company_linkedin = data["company_linkedin"]
+      @company_website = data["company_website"]
+      @company_size = data["company_size"]
+      @company_industry = data["company_industry"]
+      @company_facebook = data["company_facebook"]
+      @company_twitter = data["company_twitter"]
+      @company_country = data["company_country"]
+      @company_state = data["company_state"]
+      @company_city = data["company_city"]
+    end
+  end
+
+  class ClfResponse < BaseResponse
+    attr_accessor :profiles
+
+    def initialize(data = {})
+      super(data)
+      @profiles = (data["profiles"] || []).map { |p| ClfProfile.new(p) }
+    end
+  end
 end

@@ -282,6 +282,14 @@ module Cufinder
       response = @client.post("/jca", params)
       JcaResponse.new(response)
     end
+
+    # CLF Service - Contact Lookalikes API
+    def find_contact_lookalikes(params)
+      validate_required(params, [:query])
+      
+      response = @client.post("/clf", params)
+      ClfResponse.new(response)
+    end
     
     private
     

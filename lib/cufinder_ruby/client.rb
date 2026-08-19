@@ -169,5 +169,9 @@ module Cufinder
     def jca(**params)
       @services.get_job_changes(params)
     end
+
+    def clf(**params)
+      @services.find_contact_lookalikes(params)
+    end
   end
 end
