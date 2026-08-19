@@ -258,6 +258,14 @@ module Cufinder
       response = @client.post("/cja", params)
       CjaResponse.new(response)
     end
+
+    # PSA Service - Contact Signals API
+    def get_contact_signals(params)
+      validate_required(params, [:signal_name, :time_frame, :bucket])
+      
+      response = @client.post("/psa", params)
+      PsaResponse.new(response)
+    end
     
     private
     

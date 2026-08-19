@@ -157,5 +157,9 @@ module Cufinder
     def cja(**params)
       @services.search_company_jobs(params)
     end
+
+    def psa(**params)
+      @services.get_contact_signals(params)
+    end
   end
 end

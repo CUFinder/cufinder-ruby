@@ -743,4 +743,38 @@ module Cufinder
       @jobs = (data["jobs"] || []).map { |j| CompanyJob.new(j) }
     end
   end
+
+  # Signal model
+  class Signal
+    attr_accessor :name, :time_frame, :bucket
+
+    def initialize(data = {})
+      @name = data["name"]
+      @time_frame = data["time_frame"]
+      @bucket = data["bucket"]
+    end
+  end
+
+  # PSA Contact Signal
+  class ContactSignal
+    attr_accessor :full_name, :current_job, :company, :location, :social, :signal
+
+    def initialize(data = {})
+      @full_name = data["full_name"]
+      @current_job = data["current_job"]
+      @company = data["company"]
+      @location = data["location"]
+      @social = data["social"]
+      @signal = data["signal"] ? Signal.new(data["signal"]) : nil
+    end
+  end
+
+  class PsaResponse < BaseResponse
+    attr_accessor :contacts
+
+    def initialize(data = {})
+      super(data)
+      @contacts = (data["contacts"] || []).map { |c| ContactSignal.new(c) }
+    end
+  end
 end
