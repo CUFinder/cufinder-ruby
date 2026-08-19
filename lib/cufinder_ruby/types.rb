@@ -905,4 +905,14 @@ module Cufinder
       @normalized_url = data["normalized_url"]
     end
   end
+
+  # GDC - Gives Demo Checker
+  class GdcResponse < BaseResponse
+    attr_accessor :offers_demo
+
+    def initialize(data = {})
+      super(data)
+      @offers_demo = data["offers_demo"]
+    end
+  end
 end

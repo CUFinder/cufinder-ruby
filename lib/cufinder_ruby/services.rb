@@ -306,6 +306,14 @@ module Cufinder
       response = @client.post("/nau", params)
       NauResponse.new(response)
     end
+
+    # GDC Service - Gives Demo Checker
+    def gives_demo(params)
+      validate_required(params, [:url])
+      
+      response = @client.post("/gdc", params)
+      GdcResponse.new(response)
+    end
     
     private
     

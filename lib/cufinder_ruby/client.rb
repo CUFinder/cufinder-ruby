@@ -181,5 +181,9 @@ module Cufinder
     def nau(**params)
       @services.normalize_url(params)
     end
+
+    def gdc(**params)
+      @services.gives_demo(params)
+    end
   end
 end
