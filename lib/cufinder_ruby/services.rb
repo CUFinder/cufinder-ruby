@@ -298,6 +298,14 @@ module Cufinder
       response = @client.post("/nap", params)
       NapResponse.new(response)
     end
+
+    # NAU Service - URL Normalizer
+    def normalize_url(params)
+      validate_required(params, [:url])
+      
+      response = @client.post("/nau", params)
+      NauResponse.new(response)
+    end
     
     private
     

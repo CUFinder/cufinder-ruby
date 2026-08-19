@@ -177,5 +177,9 @@ module Cufinder
     def nap(**params)
       @services.normalize_person_name(params)
     end
+
+    def nau(**params)
+      @services.normalize_url(params)
+    end
   end
 end

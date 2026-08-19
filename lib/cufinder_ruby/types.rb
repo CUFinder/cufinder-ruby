@@ -895,4 +895,14 @@ module Cufinder
       @normalized_name = data["normalized_name"]
     end
   end
+
+  # NAU - URL Normalizer
+  class NauResponse < BaseResponse
+    attr_accessor :normalized_url
+
+    def initialize(data = {})
+      super(data)
+      @normalized_url = data["normalized_url"]
+    end
+  end
 end
